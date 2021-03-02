@@ -14,9 +14,7 @@ function Word(props) {
     return <del className="text-red-900 bg-gray-900"> {text} </del>;
   }
   if (active) {
-    return (
-      <span className="text-indigo-200 text-3xl active"> {text} </span>
-    );
+    return <span className="text-indigo-200 text-3xl active"> {text} </span>;
   }
   return <span className="text-gray-400"> {text} </span>;
 }
@@ -36,13 +34,12 @@ const App = () => {
       // correct word
       setCorrectWordArray((data) => {
         const word = value.trim();
-        console.log('word ', word)
+        console.log('word ', word);
         const newResult = [...data];
         newResult[activeWordIndex] = word === cloud.current[activeWordIndex];
-        console.log('newResult ', newResult)
+        console.log('newResult ', newResult);
         return newResult;
       });
-
     } else {
       setUserInput(value);
     }
