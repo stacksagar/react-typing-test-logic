@@ -6,7 +6,7 @@ const getCloud = () =>
   );
 
 function Word(props) {
-  const { text, active, correct } = props;
+  const { text, active, correct } = props; 
   if (correct === true) {
     return <span className="text-green-500 bg-gray-900"> {text} </span>;
   }
@@ -36,7 +36,6 @@ const App = () => {
         const word = value.trim(); 
         const newResult = [...data];
         newResult[activeWordIndex] = word === cloud.current[activeWordIndex];
-        console.log('newResult ', newResult);
         return newResult;
       });
     } else {
