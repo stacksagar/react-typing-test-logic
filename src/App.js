@@ -1,13 +1,13 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
-const getCloud = () =>
-  `stacksagar typing keyboard programming languages appreciate greate person html engineear developer designer tailwindcss bootstrap html css javascript php python java c++ c# go rust ruby`.split(
-    ' '
-  );
+const getCloud = () => `my name is sagar roy`.split(' ');
 
 function Word(props) {
-  const { text, active, correct } = props; 
-  console.log(correct)
+  const rerender = useRef(0);
+  const { text, active, correct } = props;
+  useEffect(() => {
+    rerender.current += 1;
+  });
   if (correct === true) {
     return <span className="text-green-500 bg-gray-900"> {text} </span>;
   }
@@ -20,25 +20,62 @@ function Word(props) {
   return <span className="text-gray-400"> {text} </span>;
 }
 
-const App = () => {
-  const [userInput, setUserInput] = useState('');
-  const cloud = useRef(getCloud());
-  const [activeWordIndex, setActiveWordIndex] = useState(0);
+function Timer(props) {
+  const { startCounting, correctWords } = props;
+  const [timeElapsed, setTimeElapsed] = useState(0);
 
+  useEffect(() => {
+    let counting;
+    if (startCounting) {
+      counting = setInterval(() => {
+        setTimeElapsed((prevN) => prevN + 1);
+      }, 1000);
+    }
+
+    return () => {
+      clearInterval(counting);
+    };
+  }, [startCounting]);
+
+  const minutes = timeElapsed / 60;
+
+  return (
+    <div>
+      <p>Speed: {timeElapsed}</p>
+      <p>Speed: {(correctWords / minutes || 0).toFixed(2)} (WPM)</p>
+    </div>
+  );
+}
+
+const App = () => {
+  const cloud = useRef(getCloud());
+  const [userInput, setUserInput] = useState('');
+  const [activeWordIndex, setActiveWordIndex] = useState(0);
   const [correctWordArray, setCorrectWordArray] = useState([]);
 
+  const [startCounting, setStartCounting] = useState(false);
+
   function processInput(value) {
+    if (!startCounting) {
+      setStartCounting(true);
+    }
+
     if (value.endsWith(' ')) {
       setActiveWordIndex((index) => index + 1);
       setUserInput('');
 
       // correct word
       setCorrectWordArray((data) => {
-        const word = value.trim(); 
+        const word = value.trim();
         const newResult = [...data];
         newResult[activeWordIndex] = word === cloud.current[activeWordIndex];
         return newResult;
       });
+
+      if (activeWordIndex === cloud.current.length - 1) {
+        setStartCounting(false);
+        return;
+      }
     } else {
       setUserInput(value);
     }
@@ -47,6 +84,12 @@ const App = () => {
   return (
     <div className="p-10 w-full rounded bg-gray-600 flex flex-col justify-center items-start">
       <h1 className="py-2 px-10 bg-gray-900 rounded-lg shadow">Typing Test</h1>
+      <div className="mt-4">
+        <Timer
+          correctWords={correctWordArray.filter(Boolean).length}
+          startCounting={startCounting}
+        />
+      </div>
       <div className="bg-gray-800 py-2 px-6 rounded shadow my-5 h-32 flex items-center">
         <p className="text-2xl">
           {cloud.current.map((word, index) => {
