@@ -33,8 +33,7 @@ const App = () => {
 
       // correct word
       setCorrectWordArray((data) => {
-        const word = value.trim();
-        console.log('word ', word);
+        const word = value.trim(); 
         const newResult = [...data];
         newResult[activeWordIndex] = word === cloud.current[activeWordIndex];
         console.log('newResult ', newResult);
