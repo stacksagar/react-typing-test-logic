@@ -8,12 +8,14 @@
 [twitter-shield]: https://img.shields.io/badge/-Twitter-black.svg?style=flat-square&logo=twitter&color=555&logoColor=white
 [twitter-url]: https://twitter.com/stacksagar
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/**in**/stacksagar 
+[linkedin-url]: https://linkedin.com/in/stacksagar 
 
 <!-- PROJECT LOGO -->
-<br />
+<!-- <br />
 <p align="center">
-  <h3 align="center"><a href="https://stacksagar.github.io/discord-clone">Discord UI - with (React.js & Tailwindcss)</a></h3>
+  <h3 align="center"><a href="https://stacksagar.github.io/discord-clone">Discord UI - with (React.js & Tailwindcss)</a></h3> -->
+
+  # Typing Test Logic with (React.js)
 
 
 <!-- HOW TO RUN -->
@@ -26,11 +28,11 @@ Please follow the below instructions to run this project in your machine:
 
 1. Clone this repository
    ```sh
-   git clone https://github.com/stacksagar/discord-clone.git
+   git clone https://github.com/stacksagar/react-typing-test-logic.git
    ```
 2. Go into cloned directory
    ```sh
-   cd discord-clone
+   cd react-typing-test-logic
    ```
 3. Install dev dependencies
    ```sh
