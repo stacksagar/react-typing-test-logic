@@ -7,6 +7,7 @@ const getCloud = () =>
 
 function Word(props) {
   const { text, active, correct } = props; 
+  console.log(correct)
   if (correct === true) {
     return <span className="text-green-500 bg-gray-900"> {text} </span>;
   }
